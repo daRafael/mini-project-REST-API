@@ -40,11 +40,27 @@ app.get("/docs", (req, res) => {
 });
 
 app.get('/api/cohorts', (req, res) => {
-  res.json(require('./cohorts.json'));
+  Cohort.find({})
+    .then((cohorts) => {
+      console.log("Retrived cohorts ->", cohorts);
+      res.json(cohorts);
+    })
+    .catch((error) => {
+      console.error("Error while retrieving cohorts ->", error);
+      res.status(500).json({error: "Failed to retrieve cohorts"});
+    })
 })
 
 app.get('/api/students', (req, res) => {
-  res.json(require('./students.json'));
+  Student.find({})
+    .then((students) => {
+      console.log("Retrived cohorts ->", students);
+      res.json(students);
+    })
+    .catch((error) => {
+      console.error("Error while retrieving students ->", error);
+      res.status(500).json({error: "Failed to retrieve students"});
+    })
 })
 
 
