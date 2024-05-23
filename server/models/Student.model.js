@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { format } = require("morgan");
 const Schema = mongoose.Schema;
 
-//Cohort Schema
+//student Schema
 const studentSchema = new Schema( {
   firstName: { type: String, required: true },
   lastName:{ type: String, required: true },
