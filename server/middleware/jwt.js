@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const isAuthenticated = (req, res, next) => {
-  if(!res.headers.authorization) {
+  if(!req.headers.authorization) {
     res.status(401).send({ error: "No token provided" });
     return;
   }

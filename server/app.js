@@ -1,3 +1,4 @@
+require('dotenv').config();
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
 // ...
@@ -10,6 +11,7 @@ const app = express();
 // MIDDLEWARE
 // Research Team - Set up CORS middleware here:
 // ...
+const  isAuthenticated  = require('./middleware/jwt')
 require('./config')(app);
 
 // ROUTES - https://expressjs.com/en/starter/basic-routing.html
@@ -28,6 +30,18 @@ app.use('/api', studentRoutes);
 // COHORT ROUTES
 const cohortRoutes = require('./routes/cohort.routes');
 app.use('/api', cohortRoutes);
+
+//AUTH ROUTES
+const authRoutes = require('./routes/auth.routes');
+app.use('/auth', authRoutes);
+
+//PROTECTED ROUTES
+const protectedRoutes = require('./routes/protected.routes');
+app.use('/auth', isAuthenticated, protectedRoutes);
+
+//USER ROUTE
+const userRoutes = require('./routes/user.routes');
+app.use('/api', isAuthenticated, userRoutes)
 
 
 require('./error-handling')(app);
