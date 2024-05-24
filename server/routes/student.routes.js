@@ -37,6 +37,7 @@ router.post('/students', (req, res) => {
       console.log('Error creating student:', err);
       res.status(500).json({ error: 'Failed to create student' });
     });
+    
 });
 
 //get students
